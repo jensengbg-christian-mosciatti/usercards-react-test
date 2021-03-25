@@ -1,25 +1,30 @@
-import logo from './logo.svg'
 import './App.css'
 
-import CardList from './cardList'
+import CardList from './components/CardList'
+import UserForm from './components/AddUserForm'
+import UserList from './components/UserList'
 
 import { useState, useEffect } from 'react'
 
 function App() {
-  const [list, setList] = useState([])
+  const [cards, setCards] = useState([])
 
-  const urls = [
-    'https://api.github.com/users/jensengbg-christian-mosciatti',
-    'https://api.github.com/users/gaearon',
-    'https://api.github.com/users/frff',
-  ]
+  const [users, setUsers] = useState([
+    'jensengbg-christian-mosciatti',
+    'gaearon',
+    'flaviocopes',
+    'patatin',
+  ])
+
+  const [fetchList, setFetchList] = useState(true)
+
   useEffect(() => {
-    urls.map((url) =>
-      fetch(url)
+    users.map((user) =>
+      fetch(`https://api.github.com/users/${user}`)
         .then((res) => res.json())
         .then((res) => {
-          setList((list) => [
-            ...list,
+          setCards((cards) => [
+            ...cards,
             {
               name: res.name == null ? 'Anonymous' : res.name,
               login: res.login,
@@ -29,13 +34,40 @@ function App() {
         })
         .catch((err) => console.log(err))
     )
-  }, [])
+    setUsers([])
+    setFetchList(false)
+  }, [fetchList])
+
+  const addNewUser = (userName) => {
+    setUsers([...users, userName])
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <CardList list={list} />
+      <header>
+        <h1>The useless GitHub user list</h1>
       </header>
+      <main className="App-header">
+        <section className="form-section">
+          <div className="fixed-container">
+            <UserForm
+              slot={<UserList userList={users} />}
+              slot2={
+                <button
+                  disabled={!users.length}
+                  onClick={() => setFetchList(true)}
+                >
+                  Fetch Users
+                </button>
+              }
+              eventAddUser={addNewUser}
+            />
+          </div>
+        </section>
+        <section>
+          <CardList cards={cards} />
+        </section>
+      </main>
     </div>
   )
 }

@@ -1,10 +1,11 @@
+import './CardList.css'
 import Card from './Card'
 
-export default function CardList(props) {
+export default function CardList({ cards }) {
   return (
-    <div>
+    <div className="cardlist-container">
       <ul>
-        {props.list.map((el, key) => {
+        {cards.map((el, key) => {
           return (
             <li cc={key} key={key}>
               <Card el={el} />

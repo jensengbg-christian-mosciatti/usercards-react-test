@@ -7,10 +7,10 @@ export default function Card({ el }) {
     <div
       className="card-container"
       onMouseOver={() => {
-        imgRef.current.src = process.env.PUBLIC_URL + '/smile.png'
+        imgRef.current.src = process.env.PUBLIC_URL + '/grinning.png'
       }}
       onMouseOut={() => {
-        imgRef.current.src = process.env.PUBLIC_URL + '/cry.png'
+        imgRef.current.src = process.env.PUBLIC_URL + '/thinking.png'
       }}
     >
       <img className="card-img" src={el.avatar_url} alt="faccia"></img>
@@ -20,7 +20,7 @@ export default function Card({ el }) {
       </div>
       <img
         className="card-face"
-        src={process.env.PUBLIC_URL + '/cry.png'}
+        src={process.env.PUBLIC_URL + '/thinking.png'}
         alt="face"
         ref={imgRef}
       ></img>

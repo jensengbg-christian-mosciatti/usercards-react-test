@@ -4,6 +4,27 @@ ul {
 
 .App {
   text-align: center;
+  position: relative;
+}
+
+.App > header {
+  z-index: 2;
+  top: 0;
+  position: fixed;
+  width: 100vw;
+  height: 5em;
+  background-color: white;
+}
+
+.form-section {
+  position: relative;
+  width: 15em;
+  height: 100vh;
+}
+
+.fixed-container {
+  position: fixed;
+  width: 15em;
 }
 
 .card-container {
@@ -68,11 +89,11 @@ ul {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(16px + 1vmin);
   color: white;
+  margin-top: 5em;
 }
 
 .App-link {
@@ -85,5 +106,24 @@ ul {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .App-header {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-section {
+    position: relative;
+    /* width: 100vw; */
+    height: unset;
+  }
+
+  .fixed-container {
+    position: unset;
+    /* width: 100vw; */
   }
 }
